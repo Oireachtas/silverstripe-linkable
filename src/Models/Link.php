@@ -11,7 +11,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBHTMLText;
-use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Core\Validation\ValidationResult;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
 /**
@@ -462,7 +462,7 @@ class Link extends DataObject
      *
      * @return ValidationResult
      */
-    public function validate()
+    public function validate(): ValidationResult
     {
         $valid = true;
         $message = null;
