@@ -151,17 +151,19 @@ class LinkField extends TextField
      */
     public function getLinkObject()
     {
-        $requestID = Controller::curr()->request->requestVar('LinkID');
+        $controller = Controller::curr();
+        $request = $controller ? $controller->getRequest() : null;
+        $requestID = $request ? $request->requestVar('LinkID') : null;
 
-        if ($requestID == '0' && !$this->Value()) {
+        if ($requestID === '0' && !$this->getValue()) {
             return null;
         }
 
         if (!$this->linkObject) {
-            $id = $this->Value() ? $this->Value() : $requestID;
+            $id = $this->getValue() ?: $requestID;
 
-            if ((int)$id) {
-                $this->linkObject = Link::get()->byID($id);
+            if ((int) $id) {
+                $this->linkObject = Link::get()->byID((int)$id);
             }
         }
 
